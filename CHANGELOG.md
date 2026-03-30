@@ -1,0 +1,28 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.1.0] - 2026-03-30
+
+### Documentation
+
+- Write comprehensive README with examples and configuration guide
+
+### Features
+
+- Add config parsing for rules and apply sections
+- Add module pattern matcher with wildcard and capture support
+- Add Violation dataclass for checker results
+- Add variable name checker with source/transform and case support
+- Add function/method name checker with filter and prefix support
+- Add class name checker with base_class filter and regex support
+- Add module name checker with class_name derivation and regex
+- Add package name checker with case and regex support
+- line output format
+- Add CLI with pnl check command and end-to-end integration
+
+### Miscellaneous
+
+- Set up project scaffolding and tooling
+- Add runtime dependencies and CLI entry point
+- Fix ruff lint and format issues
