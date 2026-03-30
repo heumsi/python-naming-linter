@@ -1,0 +1,6 @@
+- id: python-naming-linter
+  name: Python Naming Linter
+  entry: pnl check
+  language: python
+  types: [python]
+  pass_filenames: false
