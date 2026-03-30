@@ -1,4 +1,4 @@
-from python_naming_linter.matcher import matches_pattern, match_pattern_with_captures
+from python_naming_linter.matcher import match_pattern_with_captures, matches_pattern
 
 
 def test_exact_match():

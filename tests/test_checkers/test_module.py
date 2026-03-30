@@ -1,4 +1,5 @@
 import ast
+
 from python_naming_linter.checkers.module import check_module
 from python_naming_linter.config import Rule
 

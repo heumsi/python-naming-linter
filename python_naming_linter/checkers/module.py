@@ -41,26 +41,28 @@ def check_module(tree: ast.Module, rule: Rule, file_path: str) -> list[Violation
 
             expected = _to_snake_case(first_class.name)
             if module_name != expected:
+                msg = f"Expected module name '{expected}', got '{module_name}'"
                 violations.append(
                     Violation(
                         rule_name=rule.name,
                         file_path=file_path,
                         lineno=0,
                         name=module_name,
-                        message=f"Expected module name '{expected}', got '{module_name}'",
+                        message=msg,
                     )
                 )
 
     elif "regex" in naming:
         pattern = naming["regex"]
         if not re.fullmatch(pattern, module_name):
+            msg = f"Expected module name to match '{pattern}', got '{module_name}'"
             violations.append(
                 Violation(
                     rule_name=rule.name,
                     file_path=file_path,
                     lineno=0,
                     name=module_name,
-                    message=f"Expected module name to match '{pattern}', got '{module_name}'",
+                    message=msg,
                 )
             )
 

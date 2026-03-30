@@ -41,7 +41,11 @@ _EXCEPTION_BASE_CLASSES = {
 
 def _is_exception_like(name: str) -> bool:
     """Return True if the name looks like an exception class."""
-    return name in _EXCEPTION_BASE_CLASSES or name.endswith("Error") or name.endswith("Exception")
+    return (
+        name in _EXCEPTION_BASE_CLASSES
+        or name.endswith("Error")
+        or name.endswith("Exception")
+    )
 
 
 def _base_names(node: ast.ClassDef) -> list[str]:
@@ -70,7 +74,10 @@ def _check_name(class_name: str, naming: dict) -> str | None:
         prefix = naming["prefix"]
         if isinstance(prefix, list):
             if not any(class_name.startswith(p) for p in prefix):
-                return f"Expected name to start with one of {prefix!r}, got '{class_name}'"
+                msg = (
+                    f"Expected name to start with one of {prefix!r}, got '{class_name}'"
+                )
+                return msg
         else:
             if not class_name.startswith(prefix):
                 return f"Expected name to start with '{prefix}', got '{class_name}'"
@@ -79,7 +86,8 @@ def _check_name(class_name: str, naming: dict) -> str | None:
         suffix = naming["suffix"]
         if isinstance(suffix, list):
             if not any(class_name.endswith(s) for s in suffix):
-                return f"Expected name to end with one of {suffix!r}, got '{class_name}'"
+                msg = f"Expected name to end with one of {suffix!r}, got '{class_name}'"
+                return msg
         else:
             if not class_name.endswith(suffix):
                 return f"Expected name to end with '{suffix}', got '{class_name}'"

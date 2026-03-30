@@ -22,13 +22,16 @@ def _get_return_type_name(node: ast.FunctionDef | ast.AsyncFunctionDef) -> str |
 
 
 def _check_name(func_name: str, naming: dict) -> str | None:
-    """Return an error message if func_name violates the naming constraints, else None."""
+    """Return error message if func_name violates naming constraints, else None."""
 
     if "prefix" in naming:
         prefix = naming["prefix"]
         if isinstance(prefix, list):
             if not any(func_name.startswith(p) for p in prefix):
-                return f"Expected name to start with one of {prefix!r}, got '{func_name}'"
+                msg = (
+                    f"Expected name to start with one of {prefix!r}, got '{func_name}'"
+                )
+                return msg
         else:
             if not func_name.startswith(prefix):
                 return f"Expected name to start with '{prefix}', got '{func_name}'"

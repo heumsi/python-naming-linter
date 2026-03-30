@@ -38,7 +38,7 @@ def _check_name_against_naming(
     annotation: ast.expr | None,
     naming: dict,
 ) -> str | None:
-    """Return an error message string if the name violates the naming rule, else None."""
+    """Return error message string if name violates naming rule, else None."""
 
     if "source" in naming and naming.get("source") == "type_annotation":
         transform = naming.get("transform", "snake_case")
@@ -80,18 +80,23 @@ def _check_name_against_naming(
     return None
 
 
-def _collect_attributes(tree: ast.Module) -> list[tuple[str, ast.expr | None, int]]:
+def _collect_attributes(
+    tree: ast.Module,
+) -> list[tuple[str, ast.expr | None, int]]:
     """Collect annotated assignments inside class bodies."""
     results = []
     for node in ast.walk(tree):
         if isinstance(node, ast.ClassDef):
             for item in node.body:
-                if isinstance(item, ast.AnnAssign) and isinstance(item.target, ast.Name):
-                    results.append((item.target.id, item.annotation, item.lineno))
+                if isinstance(item, ast.AnnAssign):
+                    if isinstance(item.target, ast.Name):
+                        results.append((item.target.id, item.annotation, item.lineno))
     return results
 
 
-def _collect_parameters(tree: ast.Module) -> list[tuple[str, ast.expr | None, int]]:
+def _collect_parameters(
+    tree: ast.Module,
+) -> list[tuple[str, ast.expr | None, int]]:
     """Collect function/method parameters, skipping self and cls."""
     results = []
     for node in ast.walk(tree):
@@ -109,22 +114,25 @@ def _collect_parameters(tree: ast.Module) -> list[tuple[str, ast.expr | None, in
     return results
 
 
-def _collect_local_variables(tree: ast.Module) -> list[tuple[str, ast.expr | None, int]]:
+def _collect_local_variables(
+    tree: ast.Module,
+) -> list[tuple[str, ast.expr | None, int]]:
     """Collect annotated assignments inside function bodies."""
     results = []
     for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             for item in ast.walk(node):
-                if (
-                    isinstance(item, ast.AnnAssign)
-                    and isinstance(item.target, ast.Name)
+                if isinstance(item, ast.AnnAssign) and isinstance(
+                    item.target, ast.Name
                 ):
                     results.append((item.target.id, item.annotation, item.lineno))
     return results
 
 
-def _collect_constants(tree: ast.Module) -> list[tuple[str, ast.expr | None, int]]:
-    """Collect module-level assignments where the name looks like a constant (UPPER_CASE)."""
+def _collect_constants(
+    tree: ast.Module,
+) -> list[tuple[str, ast.expr | None, int]]:
+    """Collect module-level assignments with UPPER_CASE names (constants)."""
     results = []
     for node in tree.body:
         if isinstance(node, ast.Assign):

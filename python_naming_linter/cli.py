@@ -62,17 +62,13 @@ def _find_python_files(
     if include is not None:
         normalized = [_normalize_pattern(p, root) for p in include]
         all_files = [
-            f
-            for f in all_files
-            if _matches_any(f.relative_to(root), normalized)
+            f for f in all_files if _matches_any(f.relative_to(root), normalized)
         ]
 
     if exclude is not None:
         normalized = [_normalize_pattern(p, root) for p in exclude]
         all_files = [
-            f
-            for f in all_files
-            if not _matches_any(f.relative_to(root), normalized)
+            f for f in all_files if not _matches_any(f.relative_to(root), normalized)
         ]
 
     return all_files

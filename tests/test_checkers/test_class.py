@@ -1,4 +1,5 @@
 import ast
+
 from python_naming_linter.checkers.class_ import check_class
 from python_naming_linter.config import Rule
 
@@ -12,11 +13,12 @@ def test_exception_naming_pass():
 class MetricNotFoundError(NotFoundError):
     pass
 """
+    pattern = r"^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$"
     rule = Rule(
         name="exception-naming",
         type="class",
         filter={"base_class": "Exception"},
-        naming={"regex": r"^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$"},
+        naming={"regex": pattern},
     )
     tree = _parse(source)
     violations = check_class(tree, rule, "test.py")
@@ -28,11 +30,12 @@ def test_exception_naming_violation():
 class FilterError(ValidationError):
     pass
 """
+    pattern = r"^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$"
     rule = Rule(
         name="exception-naming",
         type="class",
         filter={"base_class": "Exception"},
-        naming={"regex": r"^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$"},
+        naming={"regex": pattern},
     )
     tree = _parse(source)
     violations = check_class(tree, rule, "test.py")
