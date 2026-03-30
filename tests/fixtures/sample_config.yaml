@@ -1,0 +1,24 @@
+rules:
+  - name: attribute-matches-type
+    type: variable
+    filter: { target: attribute }
+    naming: { source: type_annotation, transform: snake_case }
+
+  - name: bool-method-prefix
+    type: function
+    filter: { return_type: bool }
+    naming: { prefix: [is_, has_, should_] }
+
+  - name: exception-naming
+    type: class
+    filter: { base_class: Exception }
+    naming: { regex: "^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$" }
+
+apply:
+  - name: domain-layer
+    rules: [attribute-matches-type, bool-method-prefix]
+    modules: contexts.*.domain
+
+  - name: global-exceptions
+    rules: [exception-naming]
+    modules: "**"
