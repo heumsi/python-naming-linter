@@ -89,6 +89,68 @@ class MyService:
     assert violations == []
 
 
+def test_decorator_filter_pass():
+    source = """\
+from dataclasses import dataclass
+
+@dataclass
+class UserProfile:
+    name: str
+"""
+    rule = Rule(
+        name="dataclass-naming",
+        type="class",
+        filter={"decorator": "dataclass"},
+        naming={"case": "PascalCase"},
+    )
+    tree = _parse(source)
+    violations = check_class(tree, rule, "test.py")
+    assert violations == []
+
+
+def test_decorator_filter_violation():
+    source = """\
+from dataclasses import dataclass
+
+@dataclass
+class user_profile:
+    name: str
+"""
+    rule = Rule(
+        name="dataclass-naming",
+        type="class",
+        filter={"decorator": "dataclass"},
+        naming={"case": "PascalCase"},
+    )
+    tree = _parse(source)
+    violations = check_class(tree, rule, "test.py")
+    assert len(violations) == 1
+    assert violations[0].name == "user_profile"
+
+
+def test_decorator_filter_skips_non_decorated():
+    source = """\
+from dataclasses import dataclass
+
+@dataclass
+class UserProfile:
+    name: str
+
+class plain_service:
+    pass
+"""
+    rule = Rule(
+        name="dataclass-naming",
+        type="class",
+        filter={"decorator": "dataclass"},
+        naming={"case": "PascalCase"},
+    )
+    tree = _parse(source)
+    violations = check_class(tree, rule, "test.py")
+    # plain_service has no @dataclass, so it should be skipped
+    assert violations == []
+
+
 def test_no_filter_checks_all_classes():
     source = """\
 class myservice:

@@ -131,3 +131,62 @@ class MyService:
     violations = check_function(tree, rule, "test.py")
     assert len(violations) == 1
     assert violations[0].name == "_validate"
+
+
+def test_decorator_filter_pass():
+    source = """\
+class MyService:
+    @staticmethod
+    def is_active() -> bool:
+        return True
+"""
+    rule = Rule(
+        name="static-bool-prefix",
+        type="function",
+        filter={"decorator": "staticmethod", "return_type": "bool"},
+        naming={"prefix": ["is_", "has_", "should_"]},
+    )
+    tree = _parse(source)
+    violations = check_function(tree, rule, "test.py")
+    assert violations == []
+
+
+def test_decorator_filter_violation():
+    source = """\
+class MyService:
+    @staticmethod
+    def validate() -> bool:
+        return True
+"""
+    rule = Rule(
+        name="static-bool-prefix",
+        type="function",
+        filter={"decorator": "staticmethod", "return_type": "bool"},
+        naming={"prefix": ["is_", "has_", "should_"]},
+    )
+    tree = _parse(source)
+    violations = check_function(tree, rule, "test.py")
+    assert len(violations) == 1
+    assert violations[0].name == "validate"
+
+
+def test_decorator_filter_skips_non_decorated():
+    source = """\
+class MyService:
+    def validate(self) -> bool:
+        return True
+
+    @staticmethod
+    def is_active() -> bool:
+        return True
+"""
+    rule = Rule(
+        name="static-bool-prefix",
+        type="function",
+        filter={"decorator": "staticmethod", "return_type": "bool"},
+        naming={"prefix": ["is_", "has_", "should_"]},
+    )
+    tree = _parse(source)
+    violations = check_function(tree, rule, "test.py")
+    # validate is not @staticmethod, so it should be skipped
+    assert violations == []
