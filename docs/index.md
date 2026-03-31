@@ -34,11 +34,13 @@ pip install python-naming-linter
 ```yaml
 rules:
   - name: bool-method-prefix
+    description: "Bool-returning functions must start with is_, has_, or should_"
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }
 
   - name: exception-naming
+    description: "Exception classes must follow the <Noun><Reason>Error pattern"
     type: class
     filter: { base_class: Exception }
     naming: { regex: "^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$" }
@@ -59,11 +61,11 @@ pnl check
 
 ```
 src/domain/service.py:12
-    [bool-method-prefix]
+    [bool-method-prefix] Bool-returning functions must start with is_, has_, or should_
     validate (expected prefix: is_ | has_ | should_)
 
 src/domain/exceptions.py:8
-    [exception-naming]
+    [exception-naming] Exception classes must follow the <Noun><Reason>Error pattern
     FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
 
 Found 2 violation(s).

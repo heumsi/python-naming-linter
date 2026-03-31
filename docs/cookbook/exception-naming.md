@@ -9,6 +9,7 @@ Consistent exception names make error handling code easier to scan and understan
 ```yaml
 rules:
   - name: exception-naming
+    description: "Exception classes must follow the <Noun><Reason>Error pattern"
     type: class
     filter: { base_class: Exception }
     naming: { regex: "^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$" }
@@ -42,7 +43,7 @@ class FilterNotFoundError(Exception):
 ```
 $ pnl check
 src/domain/exceptions.py:3
-    [exception-naming]
+    [exception-naming] Exception classes must follow the <Noun><Reason>Error pattern
     FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
 
 Found 1 violation(s).

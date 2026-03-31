@@ -11,6 +11,7 @@ Some naming conventions only apply to a specific kind of function or class. Deco
 ```yaml
 rules:
   - name: static-factory-prefix
+    description: "Static factory methods must start with create_ or build_"
     type: function
     filter: { decorator: staticmethod }
     naming: { prefix: [create_, build_] }
@@ -26,6 +27,7 @@ apply:
 ```yaml
 rules:
   - name: dataclass-naming
+    description: "Dataclass names must end with Data or Config"
     type: class
     filter: { decorator: dataclass }
     naming: { suffix: [Data, Config] }
@@ -75,11 +77,11 @@ class OrderData:
 ```
 $ pnl check
 src/domain/order.py:5
-    [static-factory-prefix]
+    [static-factory-prefix] Static factory methods must start with create_ or build_
     from_dict (expected prefix: create_ | build_)
 
 src/domain/order.py:9
-    [dataclass-naming]
+    [dataclass-naming] Dataclass names must end with Data or Config
     OrderPayload (expected suffix: Data | Config)
 
 Found 2 violation(s).

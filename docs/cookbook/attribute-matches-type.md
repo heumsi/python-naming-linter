@@ -9,6 +9,7 @@ When an attribute holds a repository, service, or other typed object, keeping th
 ```yaml
 rules:
   - name: attribute-matches-type
+    description: "Attribute names must match their type annotation in snake_case"
     type: variable
     filter: { target: attribute }
     naming: { source: type_annotation, transform: snake_case }
@@ -46,7 +47,7 @@ The `{prefix}_{expected}` form is also allowed. For example, `source_object_cont
 ```
 $ pnl check
 contexts/billing/domain/service.py:5
-    [attribute-matches-type]
+    [attribute-matches-type] Attribute names must match their type annotation in snake_case
     repo (expected: subscription_repository)
 
 Found 1 violation(s).

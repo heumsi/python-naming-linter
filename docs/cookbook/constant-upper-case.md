@@ -9,6 +9,7 @@ Module-level constants are easier to distinguish from regular variables when the
 ```yaml
 rules:
   - name: constant-upper-case
+    description: "Module-level constants must use UPPER_CASE"
     type: variable
     filter: { target: constant }
     naming: { case: UPPER_CASE }
@@ -42,11 +43,11 @@ DEFAULT_TIMEOUT_SECONDS = 30
 ```
 $ pnl check
 src/config.py:3
-    [constant-upper-case]
+    [constant-upper-case] Module-level constants must use UPPER_CASE
     max_retry_count (expected case: UPPER_CASE)
 
 src/config.py:4
-    [constant-upper-case]
+    [constant-upper-case] Module-level constants must use UPPER_CASE
     default_timeout_seconds (expected case: UPPER_CASE)
 
 Found 2 violation(s).

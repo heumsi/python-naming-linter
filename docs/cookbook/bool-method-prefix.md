@@ -9,6 +9,7 @@ Functions that return `bool` are easier to read at call sites when their names r
 ```yaml
 rules:
   - name: bool-method-prefix
+    description: "Bool-returning functions must start with is_, has_, or should_"
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }
@@ -44,7 +45,7 @@ class SubscriptionService:
 ```
 $ pnl check
 src/domain/service.py:4
-    [bool-method-prefix]
+    [bool-method-prefix] Bool-returning functions must start with is_, has_, or should_
     validate (expected prefix: is_ | has_ | should_)
 
 Found 1 violation(s).
