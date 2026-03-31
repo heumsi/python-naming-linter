@@ -1,6 +1,10 @@
 # Naming Constraints
 
-Naming constraints define how a name must be formed. They are specified in the `naming` block of a rule:
+---
+
+## Structure
+
+Naming constraints are specified in the `naming` block of a rule:
 
 ```yaml
 rules:

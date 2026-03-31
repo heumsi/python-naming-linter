@@ -25,20 +25,9 @@ apply:
 | `rules` | Yes | List of rule names to enforce (must be defined in the `rules` block) |
 | `modules` | Yes | A module path pattern that selects which files to check |
 
-### Inline Syntax
-
-For short rule lists, you can use inline YAML syntax:
-
-```yaml
-apply:
-  - name: all
-    rules: [bool-method-prefix, exception-naming]
-    modules: "**"
-```
-
 ---
 
-## Module Path Patterns
+## Module Patterns
 
 Module paths use Python's dotted notation — the same way you would import them. For example, `src/domain/service.py` becomes `src.domain.service`.
 
@@ -52,11 +41,7 @@ modules: myapp.core.utils
 
 This matches only the file `myapp/core/utils.py`.
 
----
-
-## Wildcards
-
-### `*` — Single level
+### `*` — Single Level
 
 `*` matches exactly one segment in a dotted module path. It cannot match across dots.
 
@@ -84,9 +69,7 @@ apply:
     modules: contexts.*.domain
 ```
 
----
-
-### `**` — One or more levels
+### `**` — One or More Levels
 
 `**` matches one or more segments. Use it to select all modules under a path, regardless of depth.
 
@@ -120,9 +103,7 @@ apply:
     modules: myapp.services.**
 ```
 
----
-
-## Named Capture
+### Named Capture (`{name}`)
 
 `{name}` captures a single path segment (equivalent to `*`) and makes the captured value available for back-referencing within the same pattern.
 
@@ -130,11 +111,9 @@ apply:
 modules: contexts.{context}.domain
 ```
 
-This behaves like `contexts.*.domain` but the captured value (e.g. `boards`) is bound to the name `context`. You can reference it later in the same pattern using `{context}`.
+This behaves like `contexts.*.domain` but the captured value (e.g. `boards`) is bound to the name `context`.
 
-### Back-Referencing Example
-
-Named captures are useful when you want to enforce that two parts of a path are related — for example, that a submodule name must match its parent package name:
+**Example:**
 
 ```yaml
 apply:
@@ -143,7 +122,7 @@ apply:
     modules: contexts.{context}.domain
 ```
 
-In this example, every module matching `contexts.<anything>.domain` is selected, and the middle segment is captured as `context`. This can be used in rule logic that references the captured value, enabling context-aware enforcement.
+Every module matching `contexts.<anything>.domain` is selected, and the middle segment is captured as `context`. This can be used in rule logic that references the captured value, enabling context-aware enforcement.
 
 ---
 
@@ -175,6 +154,7 @@ Here, the domain-specific rules are enforced only in `contexts.*.domain`, while 
 | Concept | Syntax | Description |
 |---------|--------|-------------|
 | `apply` block | `name`, `rules`, `modules` | Connects rules to specific module paths |
+| Exact match | `myapp.core.utils` | Matches a single specific module |
 | Single-level wildcard | `*` | Matches exactly one level in a dotted module path |
 | Multi-level wildcard | `**` | Matches one or more levels in a dotted module path |
 | Named capture | `{name}` | Captures a single level for back-referencing |

@@ -2,6 +2,10 @@
 
 Filters let you narrow the scope of a rule so it only applies to a specific subset of names. Without a filter, a rule matches every name of its `type`. With a filter, only names that satisfy all filter conditions are checked.
 
+---
+
+## Structure
+
 Filters are specified in the `filter` block of a rule:
 
 ```yaml
