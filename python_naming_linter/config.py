@@ -15,6 +15,7 @@ class Rule:
     type: str
     naming: dict
     filter: dict = field(default_factory=dict)
+    description: str | None = None
 
 
 @dataclass
@@ -49,6 +50,7 @@ def _parse_rules(rules_data: list[dict]) -> list[Rule]:
                 type=r["type"],
                 naming=r.get("naming", {}),
                 filter=r.get("filter", {}),
+                description=r.get("description"),
             )
         )
     return rules

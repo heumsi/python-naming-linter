@@ -42,10 +42,12 @@ DEFAULT_TIMEOUT_SECONDS = 30
 ```
 $ pnl check
 src/config.py:3
-    [constant-upper-case] max_retry_count (expected case: UPPER_CASE)
+    [constant-upper-case]
+    max_retry_count (expected case: UPPER_CASE)
 
 src/config.py:4
-    [constant-upper-case] default_timeout_seconds (expected case: UPPER_CASE)
+    [constant-upper-case]
+    default_timeout_seconds (expected case: UPPER_CASE)
 
 Found 2 violation(s).
 ```

@@ -44,7 +44,8 @@ class SubscriptionService:
 ```
 $ pnl check
 src/domain/service.py:4
-    [bool-method-prefix] validate (expected prefix: is_ | has_ | should_)
+    [bool-method-prefix]
+    validate (expected prefix: is_ | has_ | should_)
 
 Found 1 violation(s).
 ```

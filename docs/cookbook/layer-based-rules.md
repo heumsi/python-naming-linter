@@ -91,13 +91,16 @@ class BillingNotFoundError(Exception):
 ```
 $ pnl check
 contexts/billing/domain/service.py:3
-    [constant-upper-case] max_retry (expected case: UPPER_CASE)
+    [constant-upper-case]
+    max_retry (expected case: UPPER_CASE)
 
 contexts/billing/domain/service.py:6
-    [bool-method-prefix] validate (expected prefix: is_ | has_ | should_)
+    [bool-method-prefix]
+    validate (expected prefix: is_ | has_ | should_)
 
 contexts/billing/domain/exceptions.py:3
-    [exception-naming] BillingError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
+    [exception-naming]
+    BillingError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
 
 Found 3 violation(s).
 ```

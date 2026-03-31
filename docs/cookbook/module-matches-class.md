@@ -41,7 +41,8 @@ class CustomObject:
 ```
 $ pnl check
 contexts/catalog/domain/custom.py:1
-    [domain-module-naming] custom (expected: custom_object)
+    [domain-module-naming]
+    custom (expected: custom_object)
 
 Found 1 violation(s).
 ```

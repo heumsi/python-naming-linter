@@ -4,11 +4,12 @@ Rules are the core building blocks of `pnl`. Each rule targets a specific kind o
 
 ## Structure
 
-Every rule has three required fields and two optional ones:
+Every rule has three required fields and three optional ones:
 
 ```yaml
 rules:
   - name: my-rule          # Unique identifier for this rule
+    description: ...       # (optional) Human-readable description shown in violation output
     type: variable         # What kind of name to lint
     filter: { ... }        # (optional) Narrow which names are checked
     naming: { ... }        # How the name must be formed
@@ -21,6 +22,7 @@ The `name` is used to reference the rule in `apply` blocks and in `# pnl: ignore
 | Field | Required | Description |
 |-------|----------|-------------|
 | `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore` |
+| `description` | No | Human-readable description shown in violation output |
 | `type` | Yes | What kind of name to lint (`variable`, `function`, `class`, `module`, `package`) |
 | `filter` | No | Narrow which names are checked (see [Filters](#filters) below) |
 | `naming` | Yes | How the name must be formed (see [Naming Constraints](#naming-constraints) below) |
@@ -916,6 +918,7 @@ apply:
 | Field | Required | Description |
 |-------|----------|-------------|
 | `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore` |
+| `description` | No | Human-readable description shown in violation output |
 | `type` | Yes | What kind of name to lint (`variable`, `function`, `class`, `module`, `package`) |
 | `filter` | No | Narrow which names are checked |
 | `naming` | Yes | How the name must be formed |

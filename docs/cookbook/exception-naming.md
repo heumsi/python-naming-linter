@@ -42,7 +42,8 @@ class FilterNotFoundError(Exception):
 ```
 $ pnl check
 src/domain/exceptions.py:3
-    [exception-naming] FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
+    [exception-naming]
+    FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
 
 Found 1 violation(s).
 ```

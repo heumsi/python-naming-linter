@@ -154,6 +154,7 @@ def check_class(tree: ast.Module, rule: Rule, file_path: str) -> list[Violation]
                     lineno=node.lineno,
                     name=class_name,
                     message=msg,
+                    rule_description=rule.description,
                 )
             )
 

@@ -46,7 +46,8 @@ The `{prefix}_{expected}` form is also allowed. For example, `source_object_cont
 ```
 $ pnl check
 contexts/billing/domain/service.py:5
-    [attribute-matches-type] repo (expected: subscription_repository)
+    [attribute-matches-type]
+    repo (expected: subscription_repository)
 
 Found 1 violation(s).
 ```

@@ -59,10 +59,12 @@ pnl check
 
 ```
 src/domain/service.py:12
-    [bool-method-prefix] validate (expected prefix: is_ | has_ | should_)
+    [bool-method-prefix]
+    validate (expected prefix: is_ | has_ | should_)
 
 src/domain/exceptions.py:8
-    [exception-naming] FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
+    [exception-naming]
+    FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
 
 Found 2 violation(s).
 ```

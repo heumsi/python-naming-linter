@@ -75,10 +75,12 @@ class OrderData:
 ```
 $ pnl check
 src/domain/order.py:5
-    [static-factory-prefix] from_dict (expected prefix: create_ | build_)
+    [static-factory-prefix]
+    from_dict (expected prefix: create_ | build_)
 
 src/domain/order.py:9
-    [dataclass-naming] OrderPayload (expected suffix: Data | Config)
+    [dataclass-naming]
+    OrderPayload (expected suffix: Data | Config)
 
 Found 2 violation(s).
 ```

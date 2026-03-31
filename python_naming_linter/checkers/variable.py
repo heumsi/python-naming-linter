@@ -170,6 +170,7 @@ def check_variable(tree: ast.Module, rule: Rule, file_path: str) -> list[Violati
                     lineno=lineno,
                     name=var_name,
                     message=msg,
+                    rule_description=rule.description,
                 )
             )
     return violations
