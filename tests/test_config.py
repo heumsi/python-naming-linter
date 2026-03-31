@@ -20,6 +20,7 @@ def test_load_yaml_rule_fields():
     assert rule.type == "variable"
     assert rule.filter == {"target": "attribute"}
     assert rule.naming == {"source": "type_annotation", "transform": "snake_case"}
+    assert rule.description is None
 
 
 def test_load_yaml_apply_fields():
@@ -28,6 +29,27 @@ def test_load_yaml_apply_fields():
     assert apply.name == "domain-layer"
     assert apply.rules == ["attribute-matches-type", "bool-method-prefix"]
     assert apply.modules == "contexts.*.domain"
+
+
+def test_load_yaml_rule_with_description(tmp_path):
+    config_content = """\
+rules:
+  - name: bool-method-prefix
+    description: "Bool-returning functions must use a semantic prefix"
+    type: function
+    filter: { return_type: bool }
+    naming: { prefix: [is_, has_, should_] }
+apply:
+  - name: all
+    rules: [bool-method-prefix]
+    modules: "**"
+"""
+    config_file = tmp_path / "config.yaml"
+    config_file.write_text(config_content)
+    config = load_config(config_file)
+    assert config.rules[0].description == (
+        "Bool-returning functions must use a semantic prefix"
+    )
 
 
 def test_load_yaml_with_include_exclude(tmp_path):

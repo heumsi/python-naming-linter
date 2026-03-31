@@ -19,6 +19,7 @@ def check_package(rule: Rule, package_name: str) -> list[Violation]:
                     lineno=0,
                     name=package_name,
                     message="expected: snake_case",
+                    rule_description=rule.description,
                 )
             )
 
@@ -31,6 +32,7 @@ def check_package(rule: Rule, package_name: str) -> list[Violation]:
                     lineno=0,
                     name=package_name,
                     message=f"expected pattern: {naming['regex']}",
+                    rule_description=rule.description,
                 )
             )
 

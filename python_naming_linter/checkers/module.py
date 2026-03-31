@@ -49,6 +49,7 @@ def check_module(tree: ast.Module, rule: Rule, file_path: str) -> list[Violation
                         lineno=0,
                         name=module_name,
                         message=msg,
+                        rule_description=rule.description,
                     )
                 )
 
@@ -63,6 +64,7 @@ def check_module(tree: ast.Module, rule: Rule, file_path: str) -> list[Violation
                     lineno=0,
                     name=module_name,
                     message=msg,
+                    rule_description=rule.description,
                 )
             )
 
@@ -86,6 +88,7 @@ def check_module(tree: ast.Module, rule: Rule, file_path: str) -> list[Violation
                     lineno=0,
                     name=module_name,
                     message=msg,
+                    rule_description=rule.description,
                 )
             )
 

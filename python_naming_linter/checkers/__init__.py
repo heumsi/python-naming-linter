@@ -10,3 +10,4 @@ class Violation:
     lineno: int
     name: str
     message: str
+    rule_description: str | None = None

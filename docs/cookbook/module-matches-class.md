@@ -9,6 +9,7 @@ When each module contains one primary class, keeping the filename in sync with t
 ```yaml
 rules:
   - name: domain-module-naming
+    description: Module filename must match the primary class name in snake_case
     type: module
     naming: { source: class_name, transform: snake_case }
 
@@ -41,7 +42,8 @@ class CustomObject:
 ```
 $ pnl check
 contexts/catalog/domain/custom.py:1
-    [domain-module-naming] custom (expected: custom_object)
+    [domain-module-naming] Module filename must match the primary class name in snake_case
+    custom (expected: custom_object)
 
 Found 1 violation(s).
 ```

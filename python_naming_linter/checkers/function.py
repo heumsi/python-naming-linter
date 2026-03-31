@@ -131,6 +131,7 @@ def check_function(tree: ast.Module, rule: Rule, file_path: str) -> list[Violati
                     lineno=node.lineno,
                     name=func_name,
                     message=msg,
+                    rule_description=rule.description,
                 )
             )
 
