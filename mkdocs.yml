@@ -27,9 +27,11 @@ nav:
       - Quick Start: getting-started/quick-start.md
       - Configuration: getting-started/configuration.md
   - Guide:
-      - Rules: guide/rules.md
-      - Filters: guide/filters.md
-      - Naming Constraints: guide/naming-constraints.md
+      - Rules:
+          - Overview: guide/rules.md
+          - Types: guide/rule-types.md
+          - Filters: guide/filters.md
+          - Naming Constraints: guide/naming-constraints.md
       - Apply & Modules: guide/apply-and-modules.md
       - Include / Exclude: guide/include-exclude.md
       - Inline Ignore: guide/inline-ignore.md
