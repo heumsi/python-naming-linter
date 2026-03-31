@@ -11,7 +11,7 @@ Some naming conventions only apply to a specific kind of function or class. Deco
 ```yaml
 rules:
   - name: static-factory-prefix
-    description: "Static factory methods must start with create_ or build_"
+    description: Static factory methods must start with create_ or build_
     type: function
     filter: { decorator: staticmethod }
     naming: { prefix: [create_, build_] }
@@ -27,7 +27,7 @@ apply:
 ```yaml
 rules:
   - name: dataclass-naming
-    description: "Dataclass names must end with Data or Config"
+    description: Dataclass names must end with Data or Config
     type: class
     filter: { decorator: dataclass }
     naming: { suffix: [Data, Config] }

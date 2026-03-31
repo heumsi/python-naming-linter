@@ -9,7 +9,7 @@ When each module contains one primary class, keeping the filename in sync with t
 ```yaml
 rules:
   - name: domain-module-naming
-    description: "Module filename must match the primary class name in snake_case"
+    description: Module filename must match the primary class name in snake_case
     type: module
     naming: { source: class_name, transform: snake_case }
 

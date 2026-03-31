@@ -34,7 +34,7 @@ pip install python-naming-linter
 ```yaml
 rules:
   - name: bool-method-prefix
-    description: "Bool-returning functions must start with is_, has_, or should_"
+    description: Bool-returning functions must start with is_, has_, or should_
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }

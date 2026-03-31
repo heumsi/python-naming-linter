@@ -9,7 +9,7 @@ Module-level constants are easier to distinguish from regular variables when the
 ```yaml
 rules:
   - name: constant-upper-case
-    description: "Module-level constants must use UPPER_CASE"
+    description: Module-level constants must use UPPER_CASE
     type: variable
     filter: { target: constant }
     naming: { case: UPPER_CASE }

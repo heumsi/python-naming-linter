@@ -9,24 +9,24 @@ Real projects have distinct layers — domain, infrastructure, API — each with
 ```yaml
 rules:
   - name: attribute-matches-type
-    description: "Attribute names must match their type annotation in snake_case"
+    description: Attribute names must match their type annotation in snake_case
     type: variable
     filter: { target: attribute }
     naming: { source: type_annotation, transform: snake_case }
 
   - name: bool-method-prefix
-    description: "Bool-returning functions must start with is_, has_, or should_"
+    description: Bool-returning functions must start with is_, has_, or should_
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }
 
   - name: domain-module-naming
-    description: "Module filename must match the primary class name in snake_case"
+    description: Module filename must match the primary class name in snake_case
     type: module
     naming: { source: class_name, transform: snake_case }
 
   - name: constant-upper-case
-    description: "Module-level constants must use UPPER_CASE"
+    description: Module-level constants must use UPPER_CASE
     type: variable
     filter: { target: constant }
     naming: { case: UPPER_CASE }
