@@ -42,7 +42,8 @@ nav:
       - Layer-Based Rules: cookbook/layer-based-rules.md
       - Constant Upper Case: cookbook/constant-upper-case.md
       - Decorator Filtering: cookbook/decorator-filtering.md
-  - CLI Reference: cli.md
-  - Pre-commit: pre-commit.md
-  - Contributing: contributing.md
-  - Changelog: changelog.md
+  - Reference:
+      - CLI: cli.md
+      - Pre-commit: pre-commit.md
+      - Contributing: contributing.md
+      - Changelog: changelog.md
