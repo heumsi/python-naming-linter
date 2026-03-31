@@ -43,7 +43,7 @@ Every `.py` file in the project is a candidate for scanning. The `apply` block's
 
 ---
 
-### `include` only
+### Only `include`
 
 When only `include` is specified, only files matching the listed paths are scanned. Everything else is ignored.
 
@@ -69,7 +69,7 @@ Use `include` when your project has multiple top-level directories and you only 
 
 ---
 
-### `exclude` only
+### Only `exclude`
 
 When only `exclude` is specified, all `.py` files under the project root are scanned **except** those matching the excluded paths.
 
