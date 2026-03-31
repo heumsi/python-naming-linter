@@ -34,8 +34,7 @@ def test_format_violation_with_description():
     lines = output.strip().split("\n")
     assert lines[0] == "src/service.py:4"
     expected = (
-        "    [bool-method-prefix]"
-        " Bool-returning functions must use a semantic prefix"
+        "    [bool-method-prefix] Bool-returning functions must use a semantic prefix"
     )
     assert lines[1] == expected
     assert lines[2] == "    validate (expected prefix: is_ | has_ | should_)"
