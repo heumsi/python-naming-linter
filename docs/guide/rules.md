@@ -21,7 +21,7 @@ The `name` is used to reference the rule in `apply` blocks and in `# pnl: ignore
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore` |
+| `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore`. Must match `[a-zA-Z0-9_.-]+` |
 | `description` | No | Human-readable description shown in violation output |
 | `type` | Yes | What kind of name to lint (`variable`, `function`, `class`, `module`, `package`) |
 | `filter` | No | Narrow which names are checked (see [Filters](#filters) below) |
@@ -917,7 +917,7 @@ apply:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore` |
+| `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore`. Must match `[a-zA-Z0-9_.-]+` |
 | `description` | No | Human-readable description shown in violation output |
 | `type` | Yes | What kind of name to lint (`variable`, `function`, `class`, `module`, `package`) |
 | `filter` | No | Narrow which names are checked |
