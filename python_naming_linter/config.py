@@ -35,8 +35,7 @@ class Config:
 def _validate_rule_name(name: str) -> None:
     if not _VALID_RULE_NAME_RE.match(name):
         raise ValueError(
-            f"Invalid rule name '{name}'. "
-            "Rule names must match [a-zA-Z0-9_-]+"
+            f"Invalid rule name '{name}'. Rule names must match [a-zA-Z0-9_-]+"
         )
 
 
