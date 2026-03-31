@@ -12,6 +12,7 @@ from python_naming_linter.checkers.module import check_module
 from python_naming_linter.checkers.package import check_package
 from python_naming_linter.checkers.variable import check_variable
 from python_naming_linter.config import Rule, find_config, load_config
+from python_naming_linter.ignore import filter_violations, parse_ignore_comments
 from python_naming_linter.matcher import matches_pattern_or_submodule
 from python_naming_linter.reporter import format_violations
 
@@ -158,6 +159,7 @@ def check(config_path: str | None) -> None:
             continue
 
         rel_path = str(file_path.relative_to(root))
+        ignores = parse_ignore_comments(source)
         file_violations = []
 
         for rule in rules:
@@ -180,6 +182,7 @@ def check(config_path: str | None) -> None:
                 violations = _run_checker(tree, rule, rel_path, package)
                 file_violations.extend(violations)
 
+        file_violations = filter_violations(file_violations, ignores)
         if file_violations:
             output = format_violations(rel_path, file_violations)
             click.echo(output)
