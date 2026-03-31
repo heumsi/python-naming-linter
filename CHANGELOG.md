@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2026-03-31
+
+### Documentation
+
+- Add mkdocs-shadcn documentation site (#3)
+- Trigger docs deployment on version tag push instead of main push
+- Merge docs deployment into publish workflow
+- Merge docs-build and docs-deploy into single docs job
+- Remove Next Steps section from main page
+
+### Features
+
+- Add optional description field to rules (#4)
 ## [0.2.0] - 2026-03-31
 
 ### Bug Fixes
