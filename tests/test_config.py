@@ -47,7 +47,9 @@ apply:
     config_file = tmp_path / "config.yaml"
     config_file.write_text(config_content)
     config = load_config(config_file)
-    assert config.rules[0].description == "Bool-returning functions must use a semantic prefix"
+    assert config.rules[0].description == (
+        "Bool-returning functions must use a semantic prefix"
+    )
 
 
 def test_load_yaml_with_include_exclude(tmp_path):
