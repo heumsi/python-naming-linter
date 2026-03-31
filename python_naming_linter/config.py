@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
+
+_VALID_RULE_NAME_RE = re.compile(r"^[a-zA-Z0-9_-]+$")
 
 
 @dataclass
@@ -29,9 +32,17 @@ class Config:
     exclude: list[str] | None = None
 
 
+def _validate_rule_name(name: str) -> None:
+    if not _VALID_RULE_NAME_RE.match(name):
+        raise ValueError(
+            f"Invalid rule name '{name}'. Rule names must match [a-zA-Z0-9_-]+"
+        )
+
+
 def _parse_rules(rules_data: list[dict]) -> list[Rule]:
     rules = []
     for r in rules_data:
+        _validate_rule_name(r["name"])
         rules.append(
             Rule(
                 name=r["name"],
