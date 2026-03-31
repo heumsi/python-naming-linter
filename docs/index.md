@@ -109,10 +109,3 @@ apply:
     rules: [exception-naming]
     modules: "**"
 ```
-
-## Next Steps
-
-- [Installation](getting-started/installation.md) — detailed install instructions
-- [Quick Start](getting-started/quick-start.md) — step-by-step setup guide
-- [Configuration](getting-started/configuration.md) — full configuration reference
-- [Cookbook](cookbook/index.md) — real-world usage patterns
