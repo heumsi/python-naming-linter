@@ -1,6 +1,6 @@
 # Inline Ignore
 
-Sometimes a specific line legitimately violates a naming rule — a third-party interface, a legacy name you cannot change, or a deliberate exception to your convention. Rather than disabling the rule globally or restructuring your config, you can suppress violations on a per-line basis using inline ignore comments.
+Inline ignore comments let you suppress specific violations on individual lines using `# pnl: ignore`.
 
 ---
 
@@ -77,7 +77,9 @@ def __repr__(self) -> str:  # pnl: ignore
 
 ## Summary
 
-- Inline ignore comments apply only to the line they appear on. They do not affect other lines.
-- Rule names are case-sensitive and must match exactly.
-- If you specify a rule name that does not exist in your config, the comment is silently ignored — no error is raised.
-- Prefer targeted suppression (`# pnl: ignore=rule-name`) over blanket suppression (`# pnl: ignore`) so that future rules are not accidentally silenced.
+| Topic | Detail |
+|---|---|
+| Scope | Comments apply only to the line they appear on; other lines are unaffected. |
+| Case sensitivity | Rule names are case-sensitive and must match exactly. |
+| Unknown rule names | If a rule name does not exist in your config, the comment is silently ignored — no error is raised. |
+| Prefer targeted suppression | Use `# pnl: ignore=rule-name` over `# pnl: ignore` so that future rules are not accidentally silenced. |

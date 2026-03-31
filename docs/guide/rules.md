@@ -18,9 +18,7 @@ The `name` is used to reference the rule in `apply` blocks and in `# pnl: ignore
 
 ---
 
-## Rule Types
-
-### `variable`
+## `variable`
 
 Targets variable names — any assignment that introduces a name into a scope.
 
@@ -69,7 +67,7 @@ apply:
 
 ---
 
-### `function`
+## `function`
 
 Targets function and method definitions — any `def` statement at any scope level.
 
@@ -109,7 +107,7 @@ apply:
 
 ---
 
-### `class`
+## `class`
 
 Targets class definitions — any `class` statement.
 
@@ -149,7 +147,7 @@ apply:
 
 ---
 
-### `module`
+## `module`
 
 Targets the filename of each `.py` file (without the `.py` extension). Useful for enforcing that module names reflect their contents.
 
@@ -175,7 +173,7 @@ A file `custom.py` that contains only `class CustomObject` is a violation — th
 
 ---
 
-### `package`
+## `package`
 
 Targets the directory name of each Python package (a directory containing `__init__.py`).
 

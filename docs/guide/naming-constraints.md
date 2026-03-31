@@ -7,6 +7,10 @@ rules:
   - name: my-rule
     type: function
     naming: { prefix: [is_, has_] }
+apply:
+  - name: all
+    rules: [my-rule]
+    modules: "**"
 ```
 
 Each rule must have exactly one naming constraint (or one `source` + `transform` pair). The constraint is evaluated against every name that passes the rule's type and filter checks.
@@ -17,7 +21,7 @@ Each rule must have exactly one naming constraint (or one `source` + `transform`
 
 The name must start with one of the listed prefixes.
 
-**Accepted value:** a list of one or more prefix strings.
+**Accepted values:** a list of one or more prefix strings.
 
 **Example — bool-returning methods must use a semantic prefix:**
 
@@ -27,6 +31,10 @@ rules:
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }
+apply:
+  - name: all
+    rules: [bool-method-prefix]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -37,12 +45,6 @@ rules:
 | `validate` | **Violation** — no matching prefix |
 | `check_active` | **Violation** — `check_` is not in the list |
 
-**Violation message example:**
-
-```
-[bool-method-prefix] validate (expected prefix: is_ | has_ | should_)
-```
-
 **Example — test functions must start with `test_`:**
 
 ```yaml
@@ -51,6 +53,10 @@ rules:
     type: function
     filter: { decorator: pytest.mark }
     naming: { prefix: [test_] }
+apply:
+  - name: all
+    rules: [test-function-prefix]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -60,19 +66,13 @@ rules:
 | `login_succeeds` | **Violation** — missing `test_` prefix |
 | `check_login` | **Violation** — `check_` is not in the list |
 
-**Violation message example:**
-
-```
-[test-function-prefix] login_succeeds (expected prefix: test_)
-```
-
 ---
 
 ## `suffix`
 
 The name must end with one of the listed suffixes.
 
-**Accepted value:** a list of one or more suffix strings.
+**Accepted values:** a list of one or more suffix strings.
 
 **Example — data-access classes must end with `Repository` or `Service`:**
 
@@ -81,6 +81,10 @@ rules:
   - name: repository-suffix
     type: class
     naming: { suffix: [Repository, Service] }
+apply:
+  - name: all
+    rules: [repository-suffix]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -90,12 +94,6 @@ rules:
 | `UserManager` | **Violation** — no matching suffix |
 | `User` | **Violation** — no matching suffix |
 
-**Violation message example:**
-
-```
-[repository-suffix] UserManager (expected suffix: Repository | Service)
-```
-
 **Example — exception classes must end with `Error`:**
 
 ```yaml
@@ -104,6 +102,10 @@ rules:
     type: class
     filter: { base_class: Exception }
     naming: { suffix: [Error] }
+apply:
+  - name: all
+    rules: [exception-suffix]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -113,19 +115,13 @@ rules:
 | `InvalidInput` | **Violation** — does not end with `Error` |
 | `NotFoundException` | **Violation** — ends with `Exception`, not `Error` |
 
-**Violation message example:**
-
-```
-[exception-suffix] InvalidInput (expected suffix: Error)
-```
-
 ---
 
 ## `regex`
 
 The name must match a regular expression.
 
-**Accepted value:** a string containing a valid Python regular expression.
+**Accepted values:** a string containing a valid Python regular expression.
 
 This is the most expressive constraint — use it when `prefix`, `suffix`, or `case` are not specific enough.
 
@@ -137,6 +133,10 @@ rules:
     type: class
     filter: { base_class: Exception }
     naming: { regex: "^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$" }
+apply:
+  - name: all
+    rules: [exception-naming]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -146,12 +146,6 @@ rules:
 | `FilterError` | **Violation** — does not end with the required suffix group |
 | `userNotFoundError` | **Violation** — does not start with an uppercase letter |
 
-**Violation message example:**
-
-```
-[exception-naming] FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
-```
-
 **Example — module-level constants must be all-uppercase with underscores:**
 
 ```yaml
@@ -160,6 +154,10 @@ rules:
     type: variable
     filter: { target: constant }
     naming: { regex: "^[A-Z][A-Z0-9_]*$" }
+apply:
+  - name: all
+    rules: [constant-regex]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -170,12 +168,6 @@ rules:
 | `max_retries` | **Violation** — lowercase |
 | `MaxRetries` | **Violation** — mixed case |
 | `_PRIVATE` | **Violation** — starts with underscore, not matched by `^[A-Z]` |
-
-**Violation message example:**
-
-```
-[constant-regex] max_retries (expected pattern: ^[A-Z][A-Z0-9_]*$)
-```
 
 ---
 
@@ -206,6 +198,10 @@ rules:
     type: variable
     filter: { target: attribute }
     naming: { source: type_annotation, transform: snake_case }
+apply:
+  - name: all
+    rules: [attribute-matches-type]
+    modules: "**"
 ```
 
 | Declaration | Result |
@@ -225,6 +221,10 @@ rules:
   - name: domain-module-naming
     type: module
     naming: { source: class_name, transform: snake_case }
+apply:
+  - name: all
+    rules: [domain-module-naming]
+    modules: "**"
 ```
 
 | File | Class | Result |
@@ -255,6 +255,10 @@ rules:
   - name: function-snake-case
     type: function
     naming: { case: snake_case }
+apply:
+  - name: all
+    rules: [function-snake-case]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -273,6 +277,10 @@ rules:
     type: variable
     filter: { target: constant }
     naming: { case: UPPER_CASE }
+apply:
+  - name: all
+    rules: [constant-upper-case]
+    modules: "**"
 ```
 
 | Name | Result |
@@ -289,6 +297,10 @@ rules:
   - name: class-pascal-case
     type: class
     naming: { case: PascalCase }
+apply:
+  - name: all
+    rules: [class-pascal-case]
+    modules: "**"
 ```
 
 | Name | Result |
