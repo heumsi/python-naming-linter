@@ -19,7 +19,7 @@ The name must start with one of the listed prefixes.
 
 **Accepted value:** a list of one or more prefix strings.
 
-**Example:**
+**Example — bool-returning methods must use a semantic prefix:**
 
 ```yaml
 rules:
@@ -43,6 +43,29 @@ rules:
 [bool-method-prefix] validate (expected prefix: is_ | has_ | should_)
 ```
 
+**Example — test functions must start with `test_`:**
+
+```yaml
+rules:
+  - name: test-function-prefix
+    type: function
+    filter: { decorator: pytest.mark }
+    naming: { prefix: [test_] }
+```
+
+| Name | Result |
+|------|--------|
+| `test_login_succeeds` | Pass — starts with `test_` |
+| `test_invalid_token` | Pass — starts with `test_` |
+| `login_succeeds` | **Violation** — missing `test_` prefix |
+| `check_login` | **Violation** — `check_` is not in the list |
+
+**Violation message example:**
+
+```
+[test-function-prefix] login_succeeds (expected prefix: test_)
+```
+
 ---
 
 ## `suffix`
@@ -51,7 +74,7 @@ The name must end with one of the listed suffixes.
 
 **Accepted value:** a list of one or more suffix strings.
 
-**Example:**
+**Example — data-access classes must end with `Repository` or `Service`:**
 
 ```yaml
 rules:
@@ -73,6 +96,29 @@ rules:
 [repository-suffix] UserManager (expected suffix: Repository | Service)
 ```
 
+**Example — exception classes must end with `Error`:**
+
+```yaml
+rules:
+  - name: exception-suffix
+    type: class
+    filter: { base_class: Exception }
+    naming: { suffix: [Error] }
+```
+
+| Name | Result |
+|------|--------|
+| `ValidationError` | Pass — ends with `Error` |
+| `NotFoundError` | Pass — ends with `Error` |
+| `InvalidInput` | **Violation** — does not end with `Error` |
+| `NotFoundException` | **Violation** — ends with `Exception`, not `Error` |
+
+**Violation message example:**
+
+```
+[exception-suffix] InvalidInput (expected suffix: Error)
+```
+
 ---
 
 ## `regex`
@@ -83,7 +129,7 @@ The name must match a regular expression.
 
 This is the most expressive constraint — use it when `prefix`, `suffix`, or `case` are not specific enough.
 
-**Example:**
+**Example — exception class names must follow a structured pattern:**
 
 ```yaml
 rules:
@@ -104,6 +150,31 @@ rules:
 
 ```
 [exception-naming] FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
+```
+
+**Example — module-level constants must be all-uppercase with underscores:**
+
+```yaml
+rules:
+  - name: constant-regex
+    type: variable
+    filter: { target: constant }
+    naming: { regex: "^[A-Z][A-Z0-9_]*$" }
+```
+
+| Name | Result |
+|------|--------|
+| `MAX_RETRIES` | Pass — all uppercase with underscores |
+| `DEFAULT_TIMEOUT` | Pass — all uppercase with underscores |
+| `API_V2_URL` | Pass — uppercase with digits and underscores |
+| `max_retries` | **Violation** — lowercase |
+| `MaxRetries` | **Violation** — mixed case |
+| `_PRIVATE` | **Violation** — starts with underscore, not matched by `^[A-Z]` |
+
+**Violation message example:**
+
+```
+[constant-regex] max_retries (expected pattern: ^[A-Z][A-Z0-9_]*$)
 ```
 
 ---
@@ -140,7 +211,9 @@ rules:
 | Declaration | Result |
 |-------------|--------|
 | `subscription_repository: SubscriptionRepository` | Pass — name matches transformed type |
+| `order_service: OrderService` | Pass — name matches transformed type |
 | `repo: SubscriptionRepository` | **Violation** — `repo` does not match `subscription_repository` |
+| `svc: OrderService` | **Violation** — `svc` does not match `order_service` |
 | `source_object_context: ObjectContext` | Pass — name ends with `_object_context` (prefix + expected form is allowed) |
 
 The `{prefix}_{expected}` form is accepted. If the expected derived name is `object_context`, then `source_object_context` passes because it ends with `_object_context`.
@@ -157,7 +230,9 @@ rules:
 | File | Class | Result |
 |------|-------|--------|
 | `custom_object.py` | `CustomObject` | Pass — filename matches transformed class name |
+| `order_service.py` | `OrderService` | Pass — filename matches transformed class name |
 | `custom.py` | `CustomObject` | **Violation** — `custom` does not match `custom_object` |
+| `service.py` | `OrderService` | **Violation** — `service` does not match `order_service` |
 
 ---
 
@@ -172,6 +247,23 @@ The name must follow a specific casing convention.
 | `snake_case` | all lowercase, words separated by underscores | `my_variable_name` |
 | `PascalCase` | each word starts with uppercase, no separators | `MyClassName` |
 | `UPPER_CASE` | all uppercase, words separated by underscores | `MAX_RETRIES` |
+
+**Example — enforce `snake_case` for function names:**
+
+```yaml
+rules:
+  - name: function-snake-case
+    type: function
+    naming: { case: snake_case }
+```
+
+| Name | Result |
+|------|--------|
+| `get_user` | Pass |
+| `calculate_total_price` | Pass |
+| `getUserById` | **Violation** — camelCase |
+| `GetUser` | **Violation** — PascalCase |
+| `GETUSER` | **Violation** — all uppercase |
 
 **Example — enforce UPPER_CASE for constants:**
 
@@ -207,7 +299,7 @@ rules:
 
 ---
 
-## Summary Table
+## Summary
 
 | Constraint | Value type | Use when |
 |-----------|-----------|---------|

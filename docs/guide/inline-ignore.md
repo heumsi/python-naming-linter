@@ -4,7 +4,7 @@ Sometimes a specific line legitimately violates a naming rule — a third-party 
 
 ---
 
-## Ignore all rules on a line
+## Ignore All Rules on a Line
 
 Add `# pnl: ignore` at the end of a line to suppress all `pnl` violations reported for that line:
 
@@ -16,7 +16,7 @@ Any rule that would have flagged the name on this line is silenced. This is the 
 
 ---
 
-## Ignore a specific rule on a line
+## Ignore a Specific Rule on a Line
 
 To suppress only one rule, specify the rule name after `=`:
 
@@ -38,7 +38,7 @@ rules:
 
 ---
 
-## Ignore multiple specific rules on a line
+## Ignore Multiple Specific Rules on a Line
 
 To suppress more than one rule on the same line, list rule names separated by commas:
 
@@ -50,7 +50,7 @@ Both `attribute-matches-type` and `constant-upper-case` are suppressed on this l
 
 ---
 
-## Practical examples
+## Practical Examples
 
 **Suppressing a legacy attribute name that doesn't match its type:**
 
@@ -75,7 +75,7 @@ def __repr__(self) -> str:  # pnl: ignore
 
 ---
 
-## Notes
+## Summary
 
 - Inline ignore comments apply only to the line they appear on. They do not affect other lines.
 - Rule names are case-sensitive and must match exactly.

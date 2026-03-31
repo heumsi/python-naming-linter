@@ -25,7 +25,7 @@ apply:
 | `rules` | Yes | List of rule names to enforce (must be defined in the `rules` block) |
 | `modules` | Yes | A module path pattern that selects which files to check |
 
-### Inline syntax
+### Inline Syntax
 
 For short rule lists, you can use inline YAML syntax:
 
@@ -42,7 +42,7 @@ apply:
 
 Module paths use Python's dotted notation — the same way you would import them. For example, `src/domain/service.py` becomes `src.domain.service`.
 
-### Exact match
+### Exact Match
 
 To target a single module, write its full dotted path:
 
@@ -132,7 +132,7 @@ modules: contexts.{context}.domain
 
 This behaves like `contexts.*.domain` but the captured value (e.g. `boards`) is bound to the name `context`. You can reference it later in the same pattern using `{context}`.
 
-### Back-referencing example
+### Back-Referencing Example
 
 Named captures are useful when you want to enforce that two parts of a path are related — for example, that a submodule name must match its parent package name:
 
@@ -167,3 +167,15 @@ apply:
 ```
 
 Here, the domain-specific rules are enforced only in `contexts.*.domain`, while `exception-naming` is enforced everywhere. A single module can be matched by multiple groups — all matching rules will be applied.
+
+---
+
+## Summary
+
+| Concept | Syntax | Description |
+|---------|--------|-------------|
+| `apply` block | `name`, `rules`, `modules` | Connects rules to specific module paths |
+| Single-level wildcard | `*` | Matches exactly one level in a dotted module path |
+| Multi-level wildcard | `**` | Matches one or more levels in a dotted module path |
+| Named capture | `{name}` | Captures a single level for back-referencing |
+| Multiple groups | multiple `apply` entries | Different rules for different parts of the codebase |

@@ -199,7 +199,7 @@ apply:
 
 ---
 
-## Summary Table
+## Summary
 
 | Type | What it targets | Supported filters | Notes |
 |------|----------------|-------------------|-------|

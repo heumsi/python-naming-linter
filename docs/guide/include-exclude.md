@@ -135,6 +135,3 @@ The result is all files under `src/` except those in `src/generated/`.
 | Set | Not set | Only files matching `include` paths |
 | Not set | Set | All files **except** those matching `exclude` paths |
 | Set | Set | Files matching `include`, then filtered by `exclude` |
-
-!!! note
-    `include` and `exclude` control the file scanning scope. The `modules` patterns in `apply` blocks are evaluated against the scanned files — so a file excluded here will never be checked, regardless of what `modules` patterns are defined.
