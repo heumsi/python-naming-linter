@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-03-31
+
+### Documentation
+
+- Add description field examples to README
+
+### Features
+
+- Allow dot (.) in rule names (#5)
 ## [0.3.0] - 2026-03-31
 
 ### Documentation
