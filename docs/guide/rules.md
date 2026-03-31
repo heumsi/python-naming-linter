@@ -16,6 +16,15 @@ rules:
 
 The `name` is used to reference the rule in `apply` blocks and in `# pnl: ignore` comments.
 
+### Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Unique identifier, referenced in `apply` and `# pnl: ignore` |
+| `type` | Yes | What kind of name to lint (`variable`, `function`, `class`, `module`, `package`) |
+| `filter` | No | Narrow which names are checked (see [Filters](#filters) below) |
+| `naming` | Yes | How the name must be formed (see [Naming Constraints](#naming-constraints) below) |
+
 ---
 
 ## Types
