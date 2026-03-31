@@ -2,7 +2,7 @@
 
 Rules are the core building blocks of `pnl`. Each rule targets a specific kind of Python name, optionally narrows its scope with filters, and then enforces a naming constraint.
 
-## Rule Structure
+## Structure
 
 Every rule has three required fields and two optional ones:
 

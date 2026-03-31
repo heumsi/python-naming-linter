@@ -4,7 +4,7 @@ The `apply` block connects rules to the parts of your codebase where they should
 
 ---
 
-## The `apply` Block
+## Structure
 
 Each entry in `apply` is a named group that maps one or more rules to one or more modules:
 
