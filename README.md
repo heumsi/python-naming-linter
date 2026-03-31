@@ -247,6 +247,26 @@ rules = ["bool-method-prefix"]
 modules = "**"
 ```
 
+### Inline Ignore
+
+Suppress violations on specific lines using `# pnl: ignore` comments:
+
+```python
+x: int = 1  # pnl: ignore
+```
+
+To suppress only specific rules, specify rule names:
+
+```python
+x: int = 1  # pnl: ignore=attribute-matches-type
+```
+
+Multiple rules can be listed with commas:
+
+```python
+x: int = 1  # pnl: ignore=attribute-matches-type,constant-upper-case
+```
+
 ## CLI
 
 ```bash
