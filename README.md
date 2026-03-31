@@ -29,11 +29,13 @@ Create `.python-naming-linter.yaml` in your project root:
 ```yaml
 rules:
   - name: bool-method-prefix
+    description: Bool-returning functions must start with is_, has_, or should_
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }
 
   - name: exception-naming
+    description: "Exception classes must follow the <Noun><Reason>Error pattern"
     type: class
     filter: { base_class: Exception }
     naming: { regex: "^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$" }
@@ -54,10 +56,12 @@ Output:
 
 ```
 src/domain/service.py:12
-    [bool-method-prefix] validate (expected prefix: is_ | has_ | should_)
+    [bool-method-prefix] Bool-returning functions must start with is_, has_, or should_
+    validate (expected prefix: is_ | has_ | should_)
 
 src/domain/exceptions.py:8
-    [exception-naming] FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
+    [exception-naming] Exception classes must follow the <Noun><Reason>Error pattern
+    FilterError (expected pattern: ^[A-Z][a-zA-Z]+(NotFound|Invalid|...)Error$)
 
 Found 2 violation(s).
 ```
@@ -71,6 +75,7 @@ Enforce that variable names match their type annotation in snake_case:
 ```yaml
 rules:
   - name: attribute-matches-type
+    description: Attribute names must match their type annotation in snake_case
     type: variable
     filter: { target: attribute }
     naming: { source: type_annotation, transform: snake_case }
@@ -92,6 +97,7 @@ Enforce that module filenames match the primary class they contain:
 ```yaml
 rules:
   - name: domain-module-naming
+    description: Module filename must match the primary class it contains
     type: module
     naming: { source: class_name, transform: snake_case }
 
@@ -110,25 +116,30 @@ Apply different rules to different parts of your codebase:
 ```yaml
 rules:
   - name: attribute-matches-type
+    description: Attribute names must match their type annotation in snake_case
     type: variable
     filter: { target: attribute }
     naming: { source: type_annotation, transform: snake_case }
 
   - name: bool-method-prefix
+    description: Bool-returning functions must start with is_, has_, or should_
     type: function
     filter: { return_type: bool }
     naming: { prefix: [is_, has_, should_] }
 
   - name: exception-naming
+    description: "Exception classes must follow the <Noun><Reason>Error pattern"
     type: class
     filter: { base_class: Exception }
     naming: { regex: "^[A-Z][a-zA-Z]+(NotFound|Invalid|Denied|Conflict|Failed)Error$" }
 
   - name: domain-module-naming
+    description: Module filename must match the primary class it contains
     type: module
     naming: { source: class_name, transform: snake_case }
 
   - name: constant-upper-case
+    description: Module-level constants must be UPPER_CASE
     type: variable
     filter: { target: constant }
     naming: { case: UPPER_CASE }
@@ -148,6 +159,19 @@ apply:
 ```
 
 ## Configuration
+
+### Description
+
+Each rule supports an optional `description` field. When set, the description is displayed in violation output above the violation detail line, making it easier to understand why the rule exists.
+
+```yaml
+rules:
+  - name: bool-method-prefix
+    description: Bool-returning functions must start with is_, has_, or should_
+    type: function
+    filter: { return_type: bool }
+    naming: { prefix: [is_, has_, should_] }
+```
 
 ### Rule Types
 
@@ -233,6 +257,7 @@ You can also configure in `pyproject.toml`:
 ```toml
 [[tool.python-naming-linter.rules]]
 name = "bool-method-prefix"
+description = "Bool-returning functions must start with is_, has_, or should_"
 type = "function"
 
 [tool.python-naming-linter.rules.filter]
