@@ -100,3 +100,9 @@ commit_parsers = [
   { message = "^.*ci", group = "CI/CD" },
 ]
 tag_pattern = "v[0-9].*"
+
+[dependency-groups]
+dev = [
+    "mkdocs>=1.6.1",
+    "mkdocs-shadcn>=0.10.2",
+]
