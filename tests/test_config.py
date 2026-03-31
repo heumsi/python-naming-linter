@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from python_naming_linter.config import find_config, load_config
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -57,8 +59,6 @@ def test_load_yaml_without_include_exclude():
 
 
 def test_load_config_file_not_found():
-    import pytest
-
     with pytest.raises(FileNotFoundError):
         load_config(Path("nonexistent.yaml"))
 
@@ -101,3 +101,45 @@ def test_find_config_skips_pyproject_without_section(tmp_path, monkeypatch):
     (tmp_path / "pyproject.toml").write_text("[tool.other]\nfoo = 1\n")
     monkeypatch.chdir(tmp_path)
     assert find_config() is None
+
+
+@pytest.mark.parametrize(
+    "name",
+    ["attribute-matches-type", "bool_method", "rule1", "My-Rule_2"],
+)
+def test_valid_rule_names(tmp_path, name):
+    config_content = f"""\
+rules:
+  - name: {name}
+    type: variable
+    naming: {{case: snake_case}}
+apply:
+  - name: all
+    rules: [{name}]
+    modules: "**"
+"""
+    config_file = tmp_path / "config.yaml"
+    config_file.write_text(config_content)
+    config = load_config(config_file)
+    assert config.rules[0].name == name
+
+
+@pytest.mark.parametrize(
+    "name",
+    ["my rule", "rule!name", "rule name 123", "rule.name", "rule@name"],
+)
+def test_invalid_rule_names(tmp_path, name):
+    config_content = f"""\
+rules:
+  - name: "{name}"
+    type: variable
+    naming: {{case: snake_case}}
+apply:
+  - name: all
+    rules: ["{name}"]
+    modules: "**"
+"""
+    config_file = tmp_path / "config.yaml"
+    config_file.write_text(config_content)
+    with pytest.raises(ValueError, match="Invalid rule name"):
+        load_config(config_file)
