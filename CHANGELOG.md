@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-03-31
+
+### Bug Fixes
+
+- Add gitmoji prefix to publish workflow commit message
+
+### Documentation
+
+- Add inline ignore comment section to README
+
+### Features
+
+- Add rule name validation (#1)
+- ignore) (#2)
+
+### Testing
+
+- Add decorator filter tests for function and class checkers
 ## [0.1.0] - 2026-03-30
 
 ### Documentation
