@@ -39,7 +39,7 @@ class CustomObject:
 
 ## Output
 
-```
+```text
 $ pnl check
 contexts/catalog/domain/custom.py:1
     [domain-module-naming] Module filename must match the primary class name in snake_case

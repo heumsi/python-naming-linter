@@ -40,7 +40,7 @@ DEFAULT_TIMEOUT_SECONDS = 30
 
 ## Output
 
-```
+```text
 $ pnl check
 src/config.py:3
     [constant-upper-case] Module-level constants must use UPPER_CASE

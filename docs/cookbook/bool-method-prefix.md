@@ -42,7 +42,7 @@ class SubscriptionService:
 
 ## Output
 
-```
+```text
 $ pnl check
 src/domain/service.py:4
     [bool-method-prefix] Bool-returning functions must start with is_, has_, or should_

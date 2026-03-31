@@ -47,7 +47,7 @@ pnl check
 
 Violations are reported with the file path, line number, rule name, description, and what was expected:
 
-```
+```text
 src/domain/service.py:12
     [bool-method-prefix] Bool-returning functions must start with is_, has_, or should_
     validate (expected prefix: is_ | has_ | should_)

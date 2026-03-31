@@ -74,7 +74,7 @@ class OrderData:
 
 ## Output
 
-```
+```text
 $ pnl check
 src/domain/order.py:5
     [static-factory-prefix] Static factory methods must start with create_ or build_

@@ -93,7 +93,7 @@ class BillingNotFoundError(Exception):
 
 ## Output
 
-```
+```text
 $ pnl check
 contexts/billing/domain/service.py:3
     [constant-upper-case] Module-level constants must use UPPER_CASE

@@ -44,7 +44,7 @@ The `{prefix}_{expected}` form is also allowed. For example, `source_object_cont
 
 ## Output
 
-```
+```text
 $ pnl check
 contexts/billing/domain/service.py:5
     [attribute-matches-type] Attribute names must match their type annotation in snake_case

@@ -40,7 +40,7 @@ class FilterNotFoundError(Exception):
 
 ## Output
 
-```
+```text
 $ pnl check
 src/domain/exceptions.py:3
     [exception-naming] Exception classes must follow the <Noun><Reason>Error pattern
