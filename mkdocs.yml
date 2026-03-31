@@ -1,0 +1,48 @@
+site_name: python-naming-linter
+site_url: https://heumsi.github.io/python-naming-linter/
+repo_url: https://github.com/heumsi/python-naming-linter
+repo_name: heumsi/python-naming-linter
+
+theme:
+  name: shadcn
+  show_title: true
+  show_stargazers: true
+  pygments_style:
+    light: shadcn-light
+    dark: github-dark
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - fenced_code
+  - footnotes
+  - attr_list
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quick-start.md
+      - Configuration: getting-started/configuration.md
+  - Guide:
+      - Rules: guide/rules.md
+      - Filters: guide/filters.md
+      - Naming Constraints: guide/naming-constraints.md
+      - Apply & Modules: guide/apply-and-modules.md
+      - Include / Exclude: guide/include-exclude.md
+      - Inline Ignore: guide/inline-ignore.md
+  - Cookbook:
+      - Overview: cookbook/index.md
+      - Bool Method Prefix: cookbook/bool-method-prefix.md
+      - Exception Naming: cookbook/exception-naming.md
+      - Attribute Matches Type: cookbook/attribute-matches-type.md
+      - Module Matches Class: cookbook/module-matches-class.md
+      - Layer-Based Rules: cookbook/layer-based-rules.md
+      - Constant Upper Case: cookbook/constant-upper-case.md
+      - Decorator Filtering: cookbook/decorator-filtering.md
+  - CLI Reference: cli.md
+  - Pre-commit: pre-commit.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
