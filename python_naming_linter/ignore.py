@@ -4,7 +4,7 @@ import re
 
 from python_naming_linter.checkers import Violation
 
-_IGNORE_RE = re.compile(r"#\s*pnl:\s*ignore(?:=([a-zA-Z0-9_,\s-]+))?$")
+_IGNORE_RE = re.compile(r"#\s*pnl:\s*ignore(?:=([a-zA-Z0-9_.,\s-]+))?$")
 
 
 def parse_ignore_comments(source: str) -> dict[int, set[str] | None]:

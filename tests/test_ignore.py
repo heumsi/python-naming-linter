@@ -44,6 +44,16 @@ class TestParseIgnoreComments:
         source = "x: int = 1  # pnl:  ignore\n"
         assert parse_ignore_comments(source) == {1: None}
 
+    def test_ignore_rule_with_dot(self):
+        source = "x: int = 1  # pnl: ignore=shared.domain\n"
+        assert parse_ignore_comments(source) == {1: {"shared.domain"}}
+
+    def test_ignore_multiple_rules_with_dots(self):
+        source = "x: int = 1  # pnl: ignore=shared.domain,context.adapters\n"
+        assert parse_ignore_comments(source) == {
+            1: {"shared.domain", "context.adapters"}
+        }
+
 
 class TestFilterViolations:
     def _make_violation(self, rule_name: str, lineno: int) -> Violation:

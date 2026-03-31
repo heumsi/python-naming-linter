@@ -127,7 +127,14 @@ def test_find_config_skips_pyproject_without_section(tmp_path, monkeypatch):
 
 @pytest.mark.parametrize(
     "name",
-    ["attribute-matches-type", "bool_method", "rule1", "My-Rule_2"],
+    [
+        "attribute-matches-type",
+        "bool_method",
+        "rule1",
+        "My-Rule_2",
+        "rule.name",
+        "shared.domain",
+    ],
 )
 def test_valid_rule_names(tmp_path, name):
     config_content = f"""\
@@ -148,7 +155,7 @@ apply:
 
 @pytest.mark.parametrize(
     "name",
-    ["my rule", "rule!name", "rule name 123", "rule.name", "rule@name"],
+    ["my rule", "rule!name", "rule name 123", "rule@name"],
 )
 def test_invalid_rule_names(tmp_path, name):
     config_content = f"""\
