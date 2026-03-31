@@ -17,7 +17,9 @@ Each rule must have exactly one naming constraint (or one `source` + `transform`
 
 ---
 
-## `prefix`
+## Types
+
+### `prefix`
 
 The name must start with one of the listed prefixes.
 
@@ -68,7 +70,7 @@ apply:
 
 ---
 
-## `suffix`
+### `suffix`
 
 The name must end with one of the listed suffixes.
 
@@ -117,7 +119,7 @@ apply:
 
 ---
 
-## `regex`
+### `regex`
 
 The name must match a regular expression.
 
@@ -171,20 +173,20 @@ apply:
 
 ---
 
-## `source` + `transform`
+### `source` + `transform`
 
 The name must be derived from another element in the code, after applying a transformation. This is used for relational naming — where the name of one thing must reflect another.
 
 Both fields must be specified together.
 
-### `source` values
+#### `source` values
 
 | Value | What it reads |
 |-------|--------------|
 | `type_annotation` | The type annotation of the variable (e.g. `SubscriptionRepository` from `x: SubscriptionRepository`) |
 | `class_name` | The name of a class defined in the module (used with `type: module`) |
 
-### `transform` values
+#### `transform` values
 
 | Value | What it does |
 |-------|-------------|
@@ -236,7 +238,7 @@ apply:
 
 ---
 
-## `case`
+### `case`
 
 The name must follow a specific casing convention.
 

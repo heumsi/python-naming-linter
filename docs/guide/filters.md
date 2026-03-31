@@ -16,11 +16,13 @@ Multiple filter fields can be combined — a name must satisfy **all** of them t
 
 ---
 
-## `target`
+## Types
+
+### `target`
 
 Narrows which names within the rule type are checked based on their role in the code.
 
-### For `variable` rules
+#### For `variable` rules
 
 | Value | Matches |
 |-------|---------|
@@ -131,7 +133,7 @@ apply:
 
 ---
 
-### For `function` rules
+#### For `function` rules
 
 | Value | Matches |
 |-------|---------|
@@ -190,7 +192,7 @@ apply:
 
 ---
 
-## `return_type`
+### `return_type`
 
 Matches functions whose return type annotation equals the specified type name.
 
@@ -272,7 +274,7 @@ apply:
 
 ---
 
-## `decorator`
+### `decorator`
 
 Matches functions or classes that are decorated with the specified decorator name.
 
@@ -328,7 +330,7 @@ apply:
 
 ---
 
-## `base_class`
+### `base_class`
 
 Matches classes that inherit from the specified base class.
 
