@@ -440,6 +440,7 @@ dev = [
 dev = [
     { name = "mkdocs" },
     { name = "mkdocs-shadcn" },
+    { name = "pygments" },
 ]
 
 [package.metadata]
@@ -458,6 +459,7 @@ provides-extras = ["dev"]
 dev = [
     { name = "mkdocs", specifier = ">=1.6.1" },
     { name = "mkdocs-shadcn", specifier = ">=0.10.2" },
+    { name = "pygments", specifier = ">=2.18" },
 ]
 
 [[package]]
