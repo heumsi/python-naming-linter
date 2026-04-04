@@ -1,0 +1,33 @@
+# Python Naming Linter
+
+> A naming convention linter for Python projects. Define custom naming rules and enforce them with a single CLI command.
+
+## Docs
+
+- [Home](https://heumsi.github.io/python-naming-linter/): Overview, key features, and quick start examples
+- [Installation](https://heumsi.github.io/python-naming-linter/getting-started/installation/): How to install python-naming-linter
+- [Quick Start](https://heumsi.github.io/python-naming-linter/getting-started/quick-start/): Get up and running with your first config
+- [Configuration](https://heumsi.github.io/python-naming-linter/getting-started/configuration/): Configuration file format and options
+- [Rules](https://heumsi.github.io/python-naming-linter/guide/rules/): Rule types, filters, and naming constraints
+- [Apply & Modules](https://heumsi.github.io/python-naming-linter/guide/apply-and-modules/): How to target rules to specific modules
+- [Include / Exclude](https://heumsi.github.io/python-naming-linter/guide/include-exclude/): Include and exclude patterns
+- [Inline Ignore](https://heumsi.github.io/python-naming-linter/guide/inline-ignore/): Suppress violations with inline comments
+- [CLI Reference](https://heumsi.github.io/python-naming-linter/cli/): CLI commands and options
+- [Pre-commit](https://heumsi.github.io/python-naming-linter/pre-commit/): Pre-commit hook integration
+
+## Cookbook
+
+- [Cookbook Overview](https://heumsi.github.io/python-naming-linter/cookbook/): Example recipes index
+- [Bool Method Prefix](https://heumsi.github.io/python-naming-linter/cookbook/bool-method-prefix/): Enforce is_, has_, should_ prefixes for bool-returning functions
+- [Exception Naming](https://heumsi.github.io/python-naming-linter/cookbook/exception-naming/): Enforce exception class naming patterns
+- [Attribute Matches Type](https://heumsi.github.io/python-naming-linter/cookbook/attribute-matches-type/): Variable names derived from type annotations
+- [Module Matches Class](https://heumsi.github.io/python-naming-linter/cookbook/module-matches-class/): Module names matching contained class names
+- [Layer-Based Rules](https://heumsi.github.io/python-naming-linter/cookbook/layer-based-rules/): Apply different rules per architectural layer
+- [Constant Upper Case](https://heumsi.github.io/python-naming-linter/cookbook/constant-upper-case/): Enforce UPPER_CASE for constants
+- [Decorator Filtering](https://heumsi.github.io/python-naming-linter/cookbook/decorator-filtering/): Filter rules by decorator
+
+## Optional
+
+- [Contributing](https://heumsi.github.io/python-naming-linter/contributing/): How to contribute
+- [Changelog](https://heumsi.github.io/python-naming-linter/changelog/): Release history
+- [GitHub Repository](https://github.com/heumsi/python-naming-linter): Source code
