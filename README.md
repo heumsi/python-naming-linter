@@ -109,6 +109,37 @@ apply:
 
 A file `custom.py` containing `class CustomObject` is a violation — it should be `custom_object.py`.
 
+By default the filename must match the class name exactly (`match: exact`). Use
+`match: suffix` when the class name carries a leading qualifier that the filename
+drops — for example an outbound adapter whose class is `PostgresOrganizationRepository`
+but whose file is `organization_repository.py`:
+
+```yaml
+rules:
+  - name: outbound-module-naming
+    description: Outbound adapter filename is the port name; the technology lives in the directory
+    type: module
+    naming:
+      source: class_name
+      transform: snake_case
+      match: suffix
+      strip_prefix: parent_dir
+
+apply:
+  - name: outbound-adapters
+    rules: [outbound-module-naming]
+    modules: contexts.*.adapters.outbound
+```
+
+`match: suffix` requires the filename to be a trailing token-slice of the class
+name. `strip_prefix: parent_dir` additionally requires the dropped leading tokens
+(the qualifier) to equal the immediate parent directory, so the qualifier is
+carried by the directory rather than the filename. Thus `postgres/organization_repository.py`
+passes, while `postgres/postgres_organization_repository.py` (qualifier duplicated
+in the filename) and `property_sync_fetcher/google_sheet.py` (filename is a prefix,
+not a suffix) are violations. Compound qualifiers compare with separators dropped,
+so a `bigquery/` directory matches a `BigQuery…` class prefix.
+
 ### Combining Rules Per Layer
 
 Apply different rules to different parts of your codebase:
@@ -204,6 +235,8 @@ Each rule can narrow its scope with type-specific filters:
 | `suffix` | Name must end with one of the listed suffixes | `[Repository, Service]` |
 | `regex` | Name must match a regular expression | `"^[A-Z][a-zA-Z]+Error$"` |
 | `source` + `transform` | Name must be derived from another element | `source: type_annotation`, `transform: snake_case` |
+| `match` | How a `source: class_name` module name is compared — `exact` (default) or `suffix` | `match: suffix` |
+| `strip_prefix` | With `match: suffix`, the dropped qualifier must equal the immediate parent directory | `strip_prefix: parent_dir` |
 | `case` | Name must follow a casing convention | `snake_case`, `PascalCase`, `UPPER_CASE` |
 
 ### Include / Exclude

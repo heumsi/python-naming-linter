@@ -834,6 +834,39 @@ apply:
 | `custom.py` | `CustomObject` | **Violation** — `custom` does not match `custom_object` |
 | `service.py` | `OrderService` | **Violation** — `service` does not match `order_service` |
 
+#### `match` and `strip_prefix` (module + `source: class_name`)
+
+By default a `source: class_name` module rule compares exactly (`match: exact`).
+Set `match: suffix` when the class name carries a leading qualifier that the
+filename intentionally drops, and add `strip_prefix: parent_dir` to require that
+dropped qualifier to equal the immediate parent directory — so the qualifier is
+carried by the directory, not the filename.
+
+```yaml
+rules:
+  - name: outbound-module-naming
+    type: module
+    naming:
+      source: class_name
+      transform: snake_case
+      match: suffix
+      strip_prefix: parent_dir
+apply:
+  - name: outbound-adapters
+    rules: [outbound-module-naming]
+    modules: contexts.*.adapters.outbound
+```
+
+| File | Class | Result |
+|------|-------|--------|
+| `postgres/organization_repository.py` | `PostgresOrganizationRepository` | Pass — filename is the suffix, `postgres` matches the directory |
+| `bigquery/metric_repository.py` | `BigQueryMetricRepository` | Pass — compound qualifier compares with separators dropped |
+| `postgres/postgres_organization_repository.py` | `PostgresOrganizationRepository` | **Violation** — qualifier duplicated in the filename |
+| `outbound/httpx_image_fetcher.py` | `HttpxImageFetcher` | **Violation** — qualifier in the filename, no matching directory |
+| `property_sync_fetcher/google_sheet.py` | `GoogleSheetPropertySyncFetcher` | **Violation** — filename is a prefix, not a suffix |
+
+Without `strip_prefix`, `match: suffix` accepts any dropped qualifier.
+
 ---
 
 ### `case`
