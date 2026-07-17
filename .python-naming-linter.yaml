@@ -1,0 +1,43 @@
+# Self-lint config: pnl enforces its own naming conventions with pnl, the way
+# pdl lints its own dependencies and psl its own structure. Dogfoods the class,
+# function, module, and package checkers against pnl's own source.
+
+include:
+  - python_naming_linter
+
+rules:
+  - name: classes-pascal-case
+    description: Class names use PascalCase
+    type: class
+    naming: { case: PascalCase }
+
+  - name: functions-snake-case
+    description: Function and method names use snake_case
+    type: function
+    naming: { case: snake_case }
+
+  - name: modules-snake-case
+    description: Module filenames use snake_case
+    type: module
+    naming: { case: snake_case }
+
+  - name: packages-snake-case
+    description: Package names use snake_case
+    type: package
+    naming: { case: snake_case }
+
+  - name: constants-upper-case
+    description: Module-level constants use UPPER_CASE (optionally private)
+    type: variable
+    filter: { target: constant }
+    naming: { regex: "^_?[A-Z][A-Z0-9_]*$" }
+
+apply:
+  - name: all
+    rules:
+      - classes-pascal-case
+      - functions-snake-case
+      - modules-snake-case
+      - packages-snake-case
+      - constants-upper-case
+    modules: "**"

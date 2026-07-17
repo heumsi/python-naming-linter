@@ -17,3 +17,9 @@ repos:
         language: system
         pass_filenames: false
         types: [python]
+      - id: naming-linter
+        name: naming linter (self)
+        entry: uv run pnl check
+        language: system
+        pass_filenames: false
+        always_run: true
