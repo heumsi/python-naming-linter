@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2026-07-17
+
+### Documentation
+
+- Add missing syntax specifiers to fenced code blocks
+- Add llms.txt for LLM-friendly documentation
+
+### Features
+
+- Add match and strip_prefix options to module class_name naming
+
+### Miscellaneous
+
+- Add Pygments to dev dependencies
+- Dogfood pnl on its own source
 ## [0.4.0] - 2026-03-31
 
 ### Documentation
